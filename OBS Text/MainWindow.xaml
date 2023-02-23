@@ -40,6 +40,9 @@
         <Label Content="Bitte geben sie denn text ein der ausgegeben werden soll:" HorizontalAlignment="Center" Margin="0,64,0,0" Grid.Row="1" VerticalAlignment="Top" Height="26" Width="323"/>
         <CheckBox Name="DateCheck" Content="ON / OFF" HorizontalAlignment="Left" Margin="64,8,0,0" Grid.Row="2" VerticalAlignment="Top" IsChecked="True"/>
         <CheckBox Name="TimeCheck" Content="ON / OFF" HorizontalAlignment="Left" Margin="64,38,0,0" Grid.Row="2" VerticalAlignment="Top" IsChecked="True"/>
+        
+        <TextBlock Name="OutputPreview" Grid.Column="1" HorizontalAlignment="Left" Margin="32,0,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Height="177" Width="423" FontSize="22" LineHeight="46"/>
+        <Label Grid.Column="1" Content="Output Preview :" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16"/>
 
 
     </Grid>

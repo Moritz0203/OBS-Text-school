@@ -28,7 +28,7 @@ namespace OBS_Text
         {
             InitializeComponent();
             DispatcherTimer timer = new();
-            timer.Interval = TimeSpan.FromMilliseconds(500);
+            timer.Interval = TimeSpan.FromMilliseconds(100);
             timer.Tick += Timer_Tick;
             timer.Start();
         }
@@ -59,6 +59,8 @@ namespace OBS_Text
             File.WriteAllText(path, output + Eingabe + "\n" + Eingabe2 + "\n" + Eingabe3);
 
 
+            if (DateCheck.IsChecked == false && TimeCheck.IsChecked == false) { output = "\n"; }
+            OutputPreview.Text = output + Eingabe + "\n" + Eingabe2 + "\n" + Eingabe3;
             
         }
 
