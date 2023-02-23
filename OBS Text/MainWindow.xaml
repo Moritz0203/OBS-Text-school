@@ -43,6 +43,7 @@
         
         <TextBlock Name="OutputPreview" Grid.Column="1" HorizontalAlignment="Left" Margin="32,0,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Height="177" Width="423" FontSize="22" LineHeight="46"/>
         <Label Grid.Column="1" Content="Output Preview :" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16"/>
+        <Label Content="Welome to OBS text Generator" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" FontSize="22"/>
 
 
     </Grid>
