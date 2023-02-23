@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OBS Text", "OBS Text\OBS Text.csproj", "{FCC3D02B-F5D9-4EA7-B68B-32941AC58CBC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FCC3D02B-F5D9-4EA7-B68B-32941AC58CBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCC3D02B-F5D9-4EA7-B68B-32941AC58CBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCC3D02B-F5D9-4EA7-B68B-32941AC58CBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCC3D02B-F5D9-4EA7-B68B-32941AC58CBC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8A6F32DB-A6D8-4F65-922D-C2D06FADE5B9}
+	EndGlobalSection
+EndGlobal
