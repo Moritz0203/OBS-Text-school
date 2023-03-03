@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
@@ -16,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace OBS_Text
 {
@@ -33,6 +35,7 @@ namespace OBS_Text
             timer.Interval = TimeSpan.FromMilliseconds(100);
             timer.Tick += Timer_Tick;
             timer.Start();
+
 
         }
 
@@ -67,29 +70,95 @@ namespace OBS_Text
             }
         }
 
+
+        
         private void TimerOutput_Tick(object? sender, EventArgs e)
         {
             string Eingabe = eingabe.Text.Length != 0 ? eingabe.Text + " ### " : "";
             string Eingabe2 = eingabe2.Text.Length != 0 ? eingabe2.Text + " ### " : "";
-            string Eingabe3 = eingabe3.Text.Length != 0 ? eingabe3.Text + " ### " : "";
+            string Eingabe3 = eingabe3.Text.Length != 0 ? eingabe3.Text : "";
 
 
 
             string allText;
             allText = Eingabe + Eingabe2 + Eingabe3;
 
-            Dispatcher.Invoke(() =>
+            Dispatcher.Invoke( async () =>
             {
-                OutputPreview.Text = $"{output}";
+                //OutputPreview.Text = $"{output}";
                 Trace.WriteLine($"{allText}" + $"{allText.Length}");
+
+
+
+                
+                
+                
+                if (Eingabe.Length != 0 || Eingabe2.Length != 0 || Eingabe3.Length != 0)
+                {
+                    
+
+
+
+                    await Task.Run(() =>
+                    {
+                        int startIndex = 0;
+
+                        while (true)
+                        {
+                            
+                            string displayedText = "";
+
+                            if (startIndex >= 0 && allText.Length / 2 >= 0 && startIndex + allText.Length / 2 <= allText.Length)
+                            {
+                                displayedText = allText.Substring(startIndex, allText.Length / 2);
+
+                                OutputPreview.Dispatcher.Invoke(() => OutputPreview.Text = displayedText);
+                                startIndex++;
+                                if (startIndex >= allText.Length)
+                                {
+                                    startIndex = 0;
+                                }
+                            }
+
+                            
+                        }
+                    });
+                    
+                    //AnimateText(allText);
+                
+                }
+                
+               
+                //Thread.Sleep(1000);
+                
             });
 
-
-
+          
             //File.WriteAllText(path, output);
 
 
 
         }
+
+        private Task AnimateText(string text)
+        {
+            int startIndex = 0;
+            while (true)
+            {
+                string displayedText = "";
+                if (startIndex >= 0 && text.Length / 2 >= 0 && startIndex + text.Length / 2 <= text.Length)
+                {
+                    displayedText = text.Substring(startIndex, text.Length / 2);
+                }
+              
+                OutputPreview.Dispatcher.Invoke(() => OutputPreview.Text = displayedText);
+                startIndex++;
+                if (startIndex >= text.Length)
+                {
+                    startIndex = 0;
+                }
+            }
+        }
+
     }
 }
