@@ -24,6 +24,8 @@ namespace OBS_Text
     /// </summary>
     public partial class MainWindow : Window
     {
+        DispatcherTimer timerOutput = new();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -31,14 +33,14 @@ namespace OBS_Text
             timer.Interval = TimeSpan.FromMilliseconds(100);
             timer.Tick += Timer_Tick;
             timer.Start();
+
         }
 
-        string path = "C:\\Users\\morit\\OneDrive\\Desktop\\school\\OBS Text\\OBSread.txt";
-      
+        string path = "H:\\SOF\\OBS-Text-school-master\\OBSread.txt";
 
+        string output = "";
         private void Timer_Tick(object sender, EventArgs e)
         {
-
             string Windowtime = DateTime.Now.ToString("HH:mm:ss");
             string Windowdate = DateTime.Now.ToString("dd:MM:yyyy");
             Zeit.Text = Windowtime;
@@ -46,23 +48,48 @@ namespace OBS_Text
 
             string date = DateCheck.IsChecked == true ? DateTime.Now.ToString("dd:MM:yyyy") + " " : "";
             string time = TimeCheck.IsChecked == true ? DateTime.Now.ToString("HH:mm:ss") : "";
-            string Eingabe = eingabe.Text.Length != 0 ? eingabe.Text : "";
-            string Eingabe2 = eingabe2.Text.Length != 0 ? eingabe2.Text : "";
-            string Eingabe3 = eingabe3.Text.Length != 0 ? eingabe3.Text : "";
 
-            string output = "";
-
-            if ( DateCheck.IsChecked == true || TimeCheck.IsChecked == true) {
-                output = date + time + "\n";
+            if (DateCheck.IsChecked == true || TimeCheck.IsChecked == true)
+            {
+                output = date + time + "  ";
             }
-      
-            File.WriteAllText(path, output + Eingabe + "\n" + Eingabe2 + "\n" + Eingabe3);
-
-
-            if (DateCheck.IsChecked == false && TimeCheck.IsChecked == false) { output = "\n"; }
-            OutputPreview.Text = output + Eingabe + "\n" + Eingabe2 + "\n" + Eingabe3;
-            
         }
 
+        double value = 0;
+        private void SliderSpeed_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (SliderSpeed.Value != value)
+            {
+                value = SliderSpeed.Value;
+                timerOutput.Interval = TimeSpan.FromMilliseconds(value);
+                timerOutput.Tick += TimerOutput_Tick;
+                timerOutput.Start();
+            }
+        }
+
+        private void TimerOutput_Tick(object? sender, EventArgs e)
+        {
+            string Eingabe = eingabe.Text.Length != 0 ? eingabe.Text + " ### " : "";
+            string Eingabe2 = eingabe2.Text.Length != 0 ? eingabe2.Text + " ### " : "";
+            string Eingabe3 = eingabe3.Text.Length != 0 ? eingabe3.Text + " ### " : "";
+
+
+
+            string allText;
+            allText = Eingabe + Eingabe2 + Eingabe3;
+
+            Dispatcher.Invoke(() =>
+            {
+                OutputPreview.Text = $"{output}";
+                Trace.WriteLine($"{allText}" + $"{allText.Length}");
+            });
+
+
+
+            //File.WriteAllText(path, output);
+
+
+
+        }
     }
 }
